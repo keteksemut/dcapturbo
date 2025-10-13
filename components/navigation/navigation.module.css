@@ -1,0 +1,94 @@
+.menu {
+  position: absolute;
+  /* 1. Use logical properties for positioning (covers the full viewport) */
+  inset: 0;
+  block-size: 100vh; /* `block-size` is the logical property for `height` */
+
+  background-color: var(--theme-primary);
+  color: var(--theme-secondary);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* 2. Animate `transform` for better performance than `height` */
+  transform-origin: top; /* Animate from the top edge */
+  transform: scaleY(1);
+  visibility: visible;
+  transition:
+    transform 0.8s var(--ease-out-expo),
+    visibility 0s;
+  pointer-events: all;
+
+  /* 3. Use CSS Nesting for more organized and readable styles */
+  &.closed {
+    transform: scaleY(0);
+    pointer-events: none;
+    visibility: hidden;
+    /* Delay hiding until the animation completes for accessibility */
+    transition:
+      transform 0.8s var(--ease-out-expo),
+      visibility 0s 0.8s;
+  }
+
+  /* Fade contents in and out with the menu */
+  & > * {
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  &.closed > * {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .link,
+  .social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navigation {
+    /* 4. Use `clamp()` for fluid sizing with min/max values */
+    margin-block-end: clamp(
+      6rem,
+      24vw,
+      15rem
+    ); /* `margin-block-end` = `margin-bottom` */
+
+    .link {
+      flex-direction: column;
+      margin-block-end: clamp(1rem, 4.27vw, 2.5rem);
+      font-size: clamp(2.5rem, 8.53vw, 5rem);
+
+      span {
+        margin-block-end: clamp(0.5rem, 2.13vw, 1.5rem);
+      }
+    }
+  }
+
+  .social {
+    /* 5. Use `gap` for simpler and more consistent spacing */
+    gap: clamp(1rem, 4.27vw, 2.5rem);
+
+    .icon {
+      display: flex;
+      padding: clamp(0.8rem, 3.2vw, 2rem);
+      /* Set a consistent size with `aspect-ratio` */
+      inline-size: clamp(3.5rem, 10.93vw, 6rem); /* `inline-size` = `width` */
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--theme-secondary);
+      border-radius: 50%; /* `50%` is more reliable for creating circles */
+    }
+  }
+
+  /* Nesting can also be used for theme modifiers */
+  &.theme-blue,
+  &.theme-dark {
+    .social .icon svg {
+      filter: invert(1);
+    }
+  }
+}
