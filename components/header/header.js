@@ -78,3 +78,4 @@ export const Header = forwardRef(({ isoLogo, appear, className }, ref) => {
     </header>
   );
 });
+Header.displayName = "Header";
