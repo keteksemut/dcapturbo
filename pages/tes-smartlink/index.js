@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Header } from "@/components/header/header";
-import { globalStore } from "@/store/globalStore";
+import { useStore } from "@/store/useStore"; 
 
 const mockHeaderData = {
   navigationLinks: {
@@ -21,7 +21,7 @@ const mockHeaderData = {
 };
 
 export default function TestHeaderPage() {
-  const setHeaderData = globalStore((state) => state.setHeaderData);
+  const setHeaderData = useStore((state) => state.setHeaderData);
 
   useEffect(() => {
       setHeaderData(mockHeaderData);

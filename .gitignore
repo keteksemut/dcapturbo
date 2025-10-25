@@ -19,6 +19,8 @@
 
 #Js Files
 _app-5405d96bf011ae69.js
+_buildManifest.js
+_ssgManifest.js1258.554b2a3154c12865.js
 1258.554b2a3154c12865.js
 13.46e1378ba3356b86.js
 1512-51c7f10d6676d641.js
@@ -51,6 +53,9 @@ seed-program-538b6d5fcb2c41c0.js
 talent-3c99001b9b17d163.js
 team-9af52dd95911f127.js
 webpack-6a99e1b8f50a0eb3.js
+urls.txt
+test.bat
+test.ps1
 
 # new folder
 /.new_folder
