@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const globalStore = create((set, get) => ({
+export const useStore = create((set, get) => ({
   headerData: undefined,
   setHeaderData: (data) => set({ headerData: data }),
 

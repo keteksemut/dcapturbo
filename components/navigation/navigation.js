@@ -1,34 +1,32 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router';
 import { SmartLink } from '../link-item';
 import dynamic from 'next/dynamic';
 import { useShallow } from 'zustand/shallow'
-import { globalStore } from '@/store/globalStore';
+import { useStore } from '@/store/useStore';
 import clsx from 'clsx';
 import st from './navigation.module.css';
 
-const Twitter = dynamic(() => import('../logo/Twitter.svg'))
-  , Tele = dynamic(() => import('../logo/Telegram.svg'))
-  , LinkedIn = dynamic(() => import('../logo/LinkedIn.svg'))
-  , Youtube = dynamic(() => import('../logo/Youtube.svg'));
+const Twitter = dynamic(() => import('../logo/Twitter.svg'));
+const Tele = dynamic(() => import('../logo/Telegram.svg'));
+const LinkedIn = dynamic(() => import('../logo/LinkedIn.svg'));
+const Youtube = dynamic(() => import('../logo/Youtube.svg'));
 
 export const Navigation = ({ data, className }) => {
-  const [navIsOpen, setNavIsOpen] = globalStore(useShallow(state => [state.navIsOpen, state.setNavIsOpen]))
-    , isLenis = globalStore(({ lenis }) => lenis)
-    , x = useRouter();
+  const [navIsOpen, setNavIsOpen] = useStore(useShallow(state => [state.navIsOpen, state.setNavIsOpen]));
+  const isLenis = useStore(({ lenis }) => lenis);
+  const x = useRouter();
 
   useEffect(() => {
     isLenis && (navIsOpen ? isLenis.stop() : isLenis.start())
   }, [navIsOpen, isLenis]);
 
   useEffect(() => {
-    let a = () => {
-      setNavIsOpen(!1)
-    };
-    return x.events.on("routeChangeStart", a),
-      () => {
-        x.events.off("routeChangeStart", a)
-      }
+    const a = () => { setNavIsOpen(false) };
+    x.events.on("routeChangeStart", a);
+    return () => {
+      x.events.off("routeChangeStart", a)
+    }
   }, [navIsOpen]);
 
   return (

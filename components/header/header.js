@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import dynamic from "next/dynamic";
-import { globalStore } from "@/store/globalStore";
+import { useStore } from "@/store/useStore"; 
 import { useShallow } from "zustand/shallow";
 import { Navigation } from "../navigation/navigation";
 import { SmartLink } from "../link-item";
@@ -11,8 +11,8 @@ const LogoMark = dynamic(() => import('../logo/LogoMark.svg'))
   , IsoLogo = dynamic(() => import('../logo/IsoLogo.svg'));
 
 export const Header = forwardRef(({ isoLogo, appear, className }, ref) => {
-  const [navIsOpen, setNavIsOpen] = globalStore(useShallow((state) => [state.navIsOpen, state.setNavIsOpen]))
-    , headerData = globalStore((state) => state.headerData);
+  const [navIsOpen, setNavIsOpen] = useStore(useShallow((state) => [state.navIsOpen, state.setNavIsOpen]))
+    , headerData = useStore((state) => state.headerData);
 
   return (
     <header
