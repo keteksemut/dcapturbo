@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dcapturbo-36j8iecov-keteksemuts-projects.vercel.app/';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dcapturbo-36j8iecov-keteksemuts-projects.vercel.app';
   const ogImage = `${siteUrl}/og.jpg`;
 
   console.log(siteUrl);
